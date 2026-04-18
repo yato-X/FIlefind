@@ -28,8 +28,11 @@ int searchFile(char *filename, char *keyword) {
 int main() {
     int choice;
     char keyword[100];
-    char filename[100];
     int matches;
+    int i;
+
+    char *files[] = {"file1.txt", "file2.txt", "file3.txt"};
+    int numFiles = 3;
 
     printf("================================\n");
     printf("   Local File Search Engine\n");
@@ -42,12 +45,20 @@ int main() {
         scanf("%d", &choice);
 
         if (choice == 1) {
-            printf("Enter filename to search: ");
-            scanf("%s", filename);
             printf("Enter keyword to search: ");
             scanf("%s", keyword);
-            matches = searchFile(filename, keyword);
-            printf("Found %d match(es) of '%s' in %s\n", matches, keyword, filename);
+            printf("\nResults for '%s':\n", keyword);
+            printf("--------------------------------\n");
+
+            for (i = 0; i < numFiles; i++) {
+                matches = searchFile(files[i], keyword);
+                if (matches > 0) {
+                    printf("%s -> %d match(es)\n", files[i], matches);
+                } else {
+                    printf("%s -> no matches\n", files[i]);
+                }
+            }
+
         } else if (choice == 2) {
             printf("Goodbye!\n");
             break;

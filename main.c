@@ -49,6 +49,7 @@ int main() {
             scanf("%s", keyword);
             printf("\nResults for '%s':\n", keyword);
             printf("--------------------------------\n");
+            printf("Searching %d file(s)...\n", numFiles);
 
             for (i = 0; i < numFiles; i++) {
                 matches = searchFile(files[i], keyword);

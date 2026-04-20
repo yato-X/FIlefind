@@ -1,0 +1,7 @@
+Computer science is the study of computation and information.
+Algorithms are step by step instructions for solving problems.
+Programming languages allow humans to communicate with computers.
+Data structures organize information efficiently for processing.
+The internet connects billions of devices around the world.
+Artificial intelligence enables machines to learn from data.
+Software engineering involves designing and building reliable systems.

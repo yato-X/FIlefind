@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
+// Structure to store file name and match count
 struct FileResult {
     char filename[100];
     int matches;
 };
 
+// Search a single file for keyword and return match count
 int searchFile(char *filename, char *keyword) {
     FILE *file;
     char line[500];
@@ -29,6 +31,7 @@ int searchFile(char *filename, char *keyword) {
     return count;
 }
 
+// Sort results by match count (highest first)
 void sortResults(struct FileResult results[], int n) {
     int i, j;
     struct FileResult temp;
@@ -42,6 +45,27 @@ void sortResults(struct FileResult results[], int n) {
             }
         }
     }
+}
+
+// Display results
+void displayResults(struct FileResult results[], int n, char *keyword) {
+    int i;
+    printf("\nResults for '%s':\n", keyword);
+    printf("--------------------------------\n");
+
+    int found = 0;
+    for (i = 0; i < n; i++) {
+        if (results[i].matches > 0) {
+            printf("%d. %s -> %d match(es)\n", i + 1, results[i].filename, results[i].matches);
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf("No matches found for '%s'\n", keyword);
+    }
+
+    printf("--------------------------------\n");
 }
 
 int main() {
@@ -70,29 +94,17 @@ int main() {
             scanf("%s", keyword);
             printf("\nSearching %d file(s)...\n", numFiles);
 
+            // Search all files
             for (i = 0; i < numFiles; i++) {
                 strcpy(results[i].filename, files[i]);
                 results[i].matches = searchFile(files[i], keyword);
             }
 
+            // Sort by match count
             sortResults(results, numFiles);
 
-            printf("\nResults for '%s':\n", keyword);
-            printf("--------------------------------\n");
-
-            int found = 0;
-            for (i = 0; i < numFiles; i++) {
-                if (results[i].matches > 0) {
-                    printf("%d. %s -> %d match(es)\n", i + 1, results[i].filename, results[i].matches);
-                    found = 1;
-                }
-            }
-
-            if (!found) {
-                printf("No matches found for '%s'\n", keyword);
-            }
-
-            printf("--------------------------------\n");
+            // Display ranked results
+            displayResults(results, numFiles, keyword);
 
         } else if (choice == 2) {
             printf("Goodbye!\n");

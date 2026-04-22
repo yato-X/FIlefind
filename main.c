@@ -14,7 +14,8 @@ int searchFile(char *filename, char *keyword) {
     file = fopen(filename, "r");
 
     if (file == NULL) {
-        return 0;
+        printf("Warning: Could not open file '%s'. Skipping.\n", filename);
+        return -1;
     }
 
     while (fgets(line, sizeof(line), file) != NULL) {
